@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="ru">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Военный коммунизм: подготовка к контрольной</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500..900&family=Golos+Text:wght@400..700&family=Caveat:wght@500..700&display=swap">
+<style>
+/* Общий шаблон уроков: История ЕГЭ · Валерия Храпова
+   Холст слайда 1920×1080, содержимое — в полях 128px, ниже 950px идёт лента времени. */
+:root{
+  color-scheme: light;
+  --bg:#F3F1EC; --card:#FCFBF8; --ink:#1C1B1F; --muted:#55525A; --accent:#F2542D; --tint:#FFD8CA;
+  --blue:#3B5BDB; --blue-tint:#DCE3FB; --dark2:#2A292E; --frame:#2A292E;
+  --ok:#2B8A3E; --ok-tint:#D3F0DA; --warn:#B26A00; --warn-tint:#FFE8C2; --bad:#C92A2A; --bad-tint:#FFD9D9;
+  --display:Montserrat, Arial, sans-serif; --body:'Golos Text', Arial, sans-serif; --hand:Caveat, 'Brush Script MT', cursive;
+}
+html,body{height:100%}
+body{margin:0; background:var(--frame); color:var(--ink); font-family:var(--body); overflow:hidden}
+.viewport{position:fixed; inset:0; overflow:hidden}
+.stage{position:absolute; left:50%; top:calc((100% - 64px - env(safe-area-inset-bottom, 0px)) / 2); width:1920px; height:1080px; transform-origin:center center}
+.slide{position:absolute; inset:0; background:var(--bg); overflow:hidden; display:none; font-size:30px; line-height:1.35}
+.slide.active{display:block}
+.slide.dark{background:var(--ink); color:#F3F1EC}
+.slide.accent{background:var(--accent)}
+.slide p, .slide h1, .slide h2, .slide h3, .slide ul{margin:0}
+.slide ul{padding-left:1.1em}
+.slide li + li{margin-top:6px}
+.a{position:absolute}
+
+/* каркас слайда */
+.hdr{position:absolute; left:128px; top:52px; width:1664px; display:flex; justify-content:space-between; font-size:24px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted)}
+.dark .hdr{color:#B9B5AE} .accent .hdr{color:var(--ink)}
+.title{position:absolute; left:128px; top:120px; width:1664px; font:800 80px/1.1 var(--display); text-transform:uppercase; text-wrap:balance}
+.body{position:absolute; left:128px; top:236px; width:1664px; height:714px; display:flex; flex-direction:column; gap:28px}
+.sub{font-size:30px; line-height:1.4; color:var(--muted)}
+.dark .sub{color:#D9D5CE}
+.row{display:flex; gap:32px; align-items:stretch}
+.col{display:flex; flex-direction:column; gap:24px}
+.grow{flex:1}
+.hand{font-family:var(--hand); color:var(--blue); font-weight:600; font-size:40px; line-height:1.1}
+.muted{color:var(--muted)}
+.dark .muted{color:#B9B5AE}
+
+/* элементы */
+.card{background:var(--card); border:3px solid var(--ink); border-radius:24px; box-shadow:8px 8px 0 var(--ink); padding:28px 32px; display:flex; flex-direction:column; gap:12px}
+.card.tint{background:var(--tint)}
+.card.flat{box-shadow:none}
+.dark .card{background:var(--dark2); border:2px solid var(--muted); box-shadow:none}
+.card h3, .h3{font:800 32px/1.2 var(--display)}
+.card .k{font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted)}
+.card.tint .k{color:#5A3A30}
+.pill{display:inline-block; border:3px solid var(--ink); border-radius:999px; font-weight:700}
+.num{display:inline-block; font:800 24px var(--display); background:var(--tint); border-radius:999px; padding:4px 16px}
+.circle{width:72px; height:72px; border-radius:50%; background:var(--accent); border:3px solid var(--ink); display:flex; align-items:center; justify-content:center; font:800 26px var(--display); flex:none; box-sizing:border-box}
+.year{font:800 40px/1 var(--display)}
+.big-year{font:800 64px/1 var(--display)}
+.term{background:var(--card); border:3px solid var(--ink); border-radius:18px; padding:18px 24px; font-size:28px}
+.term b{font-family:var(--display)}
+.quote{background:var(--card); border-left:10px solid var(--accent); border-radius:0 20px 20px 0; padding:22px 32px; font-size:34px; font-weight:600; line-height:1.35}
+.quote cite{display:block; margin-top:8px; font-size:24px; font-style:normal; font-weight:600; color:var(--muted)}
+.arrow{flex:none; align-self:center; width:56px; height:24px}
+.chain{display:flex; flex-wrap:wrap; align-items:center; gap:14px}
+.chain .step{background:var(--card); border:3px solid var(--ink); border-radius:14px; padding:10px 18px; font-size:26px; font-weight:600}
+.chain .to{font:800 30px var(--display); color:var(--accent)}
+.accent .chain .to{color:var(--ink)}
+.accent .chain .step{font-size:32px; padding:14px 24px; box-shadow:5px 5px 0 var(--ink)}
+
+/* портрет правителя */
+.portrait{position:absolute; left:150px; top:236px; width:580px; height:600px}
+.pinfo{position:absolute; left:820px; top:236px; width:972px; display:flex; flex-direction:column; gap:26px}
+.eyebrow{font-size:26px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted)}
+.pname{font:800 128px/1 var(--display); text-transform:uppercase; letter-spacing:-2px}
+.reign{align-self:flex-start; font:800 64px/1 var(--display); background:var(--accent); border:4px solid var(--ink); border-radius:20px; padding:10px 30px 14px; box-shadow:8px 8px 0 var(--ink); transform:rotate(-2deg)}
+.reign-note{font-size:26px; color:var(--muted)}
+.facts{display:flex; flex-wrap:wrap; gap:12px}
+.fact{font-size:26px; font-weight:600; padding:8px 18px; border:3px solid var(--ink); border-radius:999px; background:var(--card)}
+
+/* политика: внутренняя и внешняя */
+.policy{display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:stretch}
+.pol{display:flex; flex-direction:column; gap:14px}
+.pol-h{align-self:flex-start; font:800 24px var(--display); letter-spacing:2px; text-transform:uppercase; padding:8px 18px; border-radius:12px; background:var(--ink); color:#F3F1EC}
+.pol-h.ext{background:var(--accent); color:var(--ink)}
+.pol .card{flex:1; font-size:25px; line-height:1.35}
+.pol .card li b{font-family:var(--display)}
+
+/* опознавательные признаки */
+.signs{display:flex; flex-wrap:wrap; align-items:center; gap:12px}
+.signs .lbl{font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-right:6px}
+.sign{font-size:24px; font-weight:600; padding:6px 16px; border:2px solid var(--ink); border-radius:999px; background:var(--card)}
+
+/* таблица */
+.tbl{width:100%; border-collapse:separate; border-spacing:0; font-size:26px; line-height:1.3; background:var(--card); border:3px solid var(--ink); border-radius:20px; overflow:hidden; box-shadow:8px 8px 0 var(--ink)}
+.tbl th, .tbl td{padding:14px 20px; text-align:left; vertical-align:top; border-bottom:2px solid #E2DED6}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font:800 24px var(--display); text-transform:uppercase; letter-spacing:1px; background:var(--tint)}
+.tbl td:first-child{font-weight:700}
+
+/* кнопки и вердикты */
+.btn{font:700 26px var(--body); color:var(--ink); background:var(--card); border:3px solid var(--ink); border-radius:999px; padding:12px 28px; box-shadow:5px 5px 0 var(--ink); cursor:pointer; transition:transform .12s, box-shadow .12s}
+.btn:hover{transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px); box-shadow:2px 2px 0 var(--ink)}
+.btn.primary{background:var(--blue); color:#F3F1EC}
+.verdict{font-size:26px; font-weight:700; line-height:1.35; border-radius:14px; padding:10px 18px; border:3px solid transparent}
+.verdict.ok{background:var(--ok-tint); color:var(--ok); border-color:var(--ok)}
+.verdict.warn{background:var(--warn-tint); color:var(--warn); border-color:var(--warn)}
+.verdict.bad{background:var(--bad-tint); color:var(--bad); border-color:var(--bad)}
+.verdict.info{background:transparent; color:var(--muted); padding-left:0}
+
+/* подсветка при наведении */
+.hover-card{cursor:pointer; transition:transform .18s, box-shadow .18s, background-color .18s, color .18s}
+.hover-card:hover, .hover-card:focus-visible, .hover-card.on{background:var(--blue); color:#F3F1EC; transform:translate(-4px,-4px); box-shadow:12px 12px 0 var(--ink)}
+.hover-card:hover .muted, .hover-card:focus-visible .muted, .hover-card.on .muted,
+.hover-card:hover .k, .hover-card:focus-visible .k, .hover-card.on .k{color:#DCE3FB}
+.hover-card:hover .num, .hover-card.on .num{background:#F3F1EC; color:var(--ink)}
+.chain .step.hover-card:hover, .chain .step.hover-card.on{box-shadow:6px 6px 0 var(--ink)}
+
+/* вопрос с открывающимся ответом */
+.qa{background:var(--tint); border:3px solid var(--ink); border-radius:24px; box-shadow:8px 8px 0 var(--ink); padding:22px 28px; display:flex; flex-direction:column; gap:14px}
+.qa.inline{flex-direction:row; align-items:center; gap:24px}
+.qa.inline .qq{flex:1}
+.qa.inline .ans{align-self:center}
+.qa .ql{font-size:22px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#5A3A30}
+.qa .qq{font-size:28px; font-weight:600; line-height:1.35}
+.ans{align-self:flex-start; min-width:200px; min-height:58px; box-sizing:border-box; padding:10px 22px; border:3px dashed var(--muted); border-radius:14px; background:rgba(252,251,248,.6); font:700 26px/1.35 var(--body); color:var(--muted); text-align:left; cursor:pointer; transition:background-color .2s, border-color .2s, color .2s}
+.ans:hover{border-color:var(--blue); color:var(--blue)}
+.ans .v{display:none}
+.ans.open{border:3px solid var(--blue); background:var(--blue-tint); color:var(--ink); cursor:default}
+.ans.open .q{display:none}
+.ans.open .v{display:inline}
+.ans:focus-visible, .btn:focus-visible, .hover-card:focus-visible, .srow:focus-visible{outline:4px solid var(--blue); outline-offset:6px}
+
+/* задание с проверкой: ответ появляется только после «Проверить» */
+.fld{width:64px; height:64px; box-sizing:border-box; border:3px solid var(--ink); border-radius:10px; background:var(--card); font:700 48px/1 var(--hand); color:var(--blue); text-align:center; padding:0; outline:none; transition:border-color .2s, background-color .2s}
+.fld.txt{width:100%; height:64px; font:600 28px var(--body); color:var(--blue); text-align:left; padding:0 18px}
+.fld::placeholder{color:#A9A59E; font:500 24px var(--body)}
+.fld:focus{border-color:var(--blue); box-shadow:0 0 0 4px var(--blue-tint)}
+.fld.ok, .opt.ok{border-color:var(--ok); background:var(--ok-tint)}
+.fld.bad, .opt.bad{border-color:var(--bad); background:var(--bad-tint)}
+.opt.miss{border-color:var(--warn); background:var(--warn-tint)}
+.opt{display:flex; gap:14px; align-items:flex-start; text-align:left; font:500 23px/1.3 var(--body); color:var(--ink); background:var(--card); border:3px solid var(--ink); border-radius:14px; padding:10px 16px; cursor:pointer; transition:background-color .15s, border-color .15s}
+.opt .box{flex:none; width:30px; height:30px; margin-top:2px; border:3px solid var(--ink); border-radius:8px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; font:800 20px var(--display); color:#F3F1EC}
+.opt.sel{background:var(--blue-tint); border-color:var(--blue)}
+.opt.sel .box{background:var(--blue); border-color:var(--blue)}
+.opt.sel .box::after{content:'✓'}
+.opt:focus-visible{outline:4px solid var(--blue); outline-offset:4px}
+.taskbar{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.taskbar .verdict{flex:1; min-width:300px}
+.reveal-on-check{display:none}
+.reveal-on-check.show{display:block; animation:rise .4s cubic-bezier(.2,.8,.2,1) both}
+span.reveal-on-check.show{display:inline-block}
+.answer{background:var(--blue-tint); border:3px solid var(--blue); border-radius:16px; padding:14px 20px; font-size:25px; line-height:1.4}
+.answer b{font-family:var(--display)}
+.cellans{margin-left:12px; font-size:24px; font-weight:700; color:var(--ok)}
+.tbl td .lbl{font:800 26px var(--display); margin-right:10px}
+.task .tbl td{vertical-align:middle}
+.tbl.compact th, .tbl.compact td{padding:10px 18px}
+html.print .taskbar, html.print .reveal-on-check{display:none !important}
+
+/* карточки-шторки: ответ закрыт полосатой заливкой, открывается по нажатию */
+.flips{display:grid; gap:24px}
+.flip{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; font:inherit; color:inherit; background:var(--card); border:3px solid var(--ink); border-radius:24px; box-shadow:8px 8px 0 var(--ink); padding:22px; cursor:pointer; transition:transform .15s, box-shadow .15s}
+.flip:hover{transform:translate(-3px,-3px); box-shadow:11px 11px 0 var(--ink)}
+.flip:focus-visible{outline:4px solid var(--blue); outline-offset:6px}
+.flip .fk{font-size:22px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted)}
+.flip .fmain{font:800 44px/1.1 var(--display)}
+.flip .ftext{font-size:26px; font-weight:600; line-height:1.3}
+.flip{min-height:var(--fh, 0px)}
+.flip svg.mini{width:var(--pw, 150px); height:auto; aspect-ratio:600/620; flex:none}
+.hidebox{position:relative; display:inline-flex; align-items:center; justify-content:center; min-width:190px; min-height:64px; box-sizing:border-box; padding:8px 18px; border-radius:14px; overflow:hidden; background:var(--blue-tint); border:3px solid var(--blue)}
+.hidebox.block{display:flex; width:100%}
+.hidebox .hv{font:800 40px/1.1 var(--display)}
+.hidebox .hv.t{font:600 25px/1.3 var(--body)}
+.hidebox::after{content:''; position:absolute; inset:-3px; background:repeating-linear-gradient(-45deg, var(--accent) 0 14px, #E0441F 14px 28px); transform-origin:left center; transition:transform .4s cubic-bezier(.6,0,.2,1)}
+.hidebox::before{content:'?'; position:absolute; inset:0; z-index:1; display:flex; align-items:center; justify-content:center; font:800 34px var(--display); color:#FCFBF8; transition:opacity .2s}
+.flip.open .hidebox::after{transform:scaleX(0)}
+.flip.open .hidebox::before{opacity:0}
+.flipbar{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.flipbar .count{font-size:26px; font-weight:700; color:var(--muted); margin-left:8px}
+html.print .flipbar{display:none !important}
+@media (prefers-reduced-motion: reduce){ .hidebox::after{transition:none} }
+
+/* перетаскивание: строки меняются местами */
+.sortable{position:absolute}
+.srow{position:absolute; left:0; right:0; display:flex; align-items:center; gap:16px; padding:0 18px; box-sizing:border-box; background:var(--card); border:3px dashed var(--ink); border-radius:16px; font-size:26px; line-height:1.25; cursor:grab; touch-action:none; user-select:none; transition:top .2s, box-shadow .15s, background-color .15s}
+.srow:hover{border-style:solid}
+.srow .grip{width:18px; height:30px; flex:none; opacity:.45; background:radial-gradient(circle, var(--ink) 2.5px, transparent 3px) 0 0 / 9px 10px}
+.srow .pos{font:800 24px var(--display); background:var(--ink); color:#F3F1EC; border-radius:10px; padding:3px 12px; flex:none}
+.srow .txt{flex:1}
+.srow .mv{width:42px; height:42px; border:2px solid var(--ink); border-radius:10px; background:var(--card); font-size:17px; line-height:1; color:var(--ink); cursor:pointer; padding:0; flex:none}
+.srow .mv:hover{background:var(--blue); color:#F3F1EC; border-color:var(--blue)}
+.srow.dragging{transition:none; cursor:grabbing; z-index:30; border-style:solid; background:var(--blue-tint); box-shadow:12px 12px 0 var(--ink)}
+.srow.swap{box-shadow:0 0 0 5px var(--blue); border-style:solid}
+.srow.ok{border:3px solid var(--ok); background:var(--ok-tint)}
+.srow.bad{border:3px solid var(--bad); background:var(--bad-tint)}
+.sortable .sbar{position:absolute; left:0; right:0; display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+
+/* место для карты или фото: файл кладётся в assets/img, движок подставит его сам */
+.ph{position:relative; margin:0; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:28px; text-align:center; color:var(--blue); background:repeating-linear-gradient(-45deg, rgba(59,91,219,.07) 0 18px, transparent 18px 36px), var(--card); border:3px dashed var(--blue); border-radius:24px; overflow:hidden}
+.ph svg.ph-ico{width:84px; height:84px; flex:none}
+.ph .ph-cap{font:800 28px/1.2 var(--display); text-transform:uppercase; letter-spacing:1px; text-wrap:balance}
+.ph .ph-file{font:500 21px/1.35 var(--body); color:var(--muted); overflow-wrap:anywhere}
+.ph .ph-file b{font-weight:700; color:var(--ink)}
+.ph.has-img{padding:0; background:#fff; border:3px solid var(--ink); box-shadow:8px 8px 0 var(--ink); cursor:zoom-in}
+.ph.has-img img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block}
+.ph.has-img.cover img{object-fit:cover}
+.ph.has-img:focus-visible{outline:4px solid var(--blue); outline-offset:6px}
+html.print .ph .ph-file{display:none}
+.zoom{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(28,27,31,.94); cursor:zoom-out}
+.zoom img{max-width:100%; max-height:100%; object-fit:contain; background:#fff; border-radius:8px}
+
+/* лента времени внизу каждого слайда */
+.tl{position:absolute; left:128px; top:986px; width:1664px; height:56px; display:flex; gap:4px; align-items:stretch}
+.tl span{flex:1; display:flex; align-items:center; justify-content:center; border-radius:10px; background:#E7E3DB; color:var(--ink); font:700 22px var(--display); letter-spacing:.5px; transition:background-color .2s, color .2s}
+.tl span.wide{flex:1.6; font-size:20px}
+.tl span.gap{margin-left:14px}
+.tl span.later{color:#9A968F; background:#EDEAE4}
+.tl span.on{background:var(--blue); color:#F3F1EC}
+.dark .tl span{background:#2A292E; color:#D9D5CE} .dark .tl span.later{color:#6F6B73; background:#24232A} .dark .tl span.on{background:var(--blue); color:#F3F1EC}
+.accent .tl span{background:rgba(28,27,31,.12); color:var(--ink)} .accent .tl span.later{color:rgba(28,27,31,.5)} .accent .tl span.on{background:var(--ink); color:#F3F1EC}
+
+/* появление элементов */
+.slide.active .in{animation:rise .5s cubic-bezier(.2,.8,.2,1) both; animation-delay:calc(var(--i, 0) * 70ms)}
+.slide.active .pop{animation:pop .55s cubic-bezier(.3,1.6,.5,1) both; animation-delay:calc(var(--i, 0) * 70ms)}
+.slide.active .slidein{animation:slidein .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0; translate:0 24px}}
+@keyframes pop{from{opacity:0; scale:.4}}
+@keyframes slidein{from{opacity:0; translate:-200px 0}}
+@media (prefers-reduced-motion: reduce){ .slide.active .in, .slide.active .pop, .slide.active .slidein{animation:none} .hover-card, .srow, .ans{transition:none} }
+
+/* панель управления */
+.bar{position:fixed; left:0; right:0; bottom:0; height:64px; padding:0 16px env(safe-area-inset-bottom, 0px); display:flex; align-items:center; justify-content:center; gap:12px; background:#1C1B1F; color:#F3F1EC; font-size:15px; box-sizing:content-box}
+.bar button{font:600 15px var(--body); color:#F3F1EC; background:#2F2E34; border:1px solid #4A4850; border-radius:999px; padding:9px 16px; cursor:pointer}
+.bar button:hover{background:#3B3A41}
+.bar button:focus-visible{outline:3px solid #8FA5F5; outline-offset:2px}
+.bar .count{min-width:72px; text-align:center; font-variant-numeric:tabular-nums; font-weight:600}
+.bar .spacer{flex:1; max-width:200px}
+.notes{position:fixed; right:16px; bottom:80px; width:min(460px, calc(100% - 32px)); max-height:60vh; overflow:auto; background:#FCFBF8; color:#1C1B1F; border:2px solid #1C1B1F; border-radius:16px; padding:18px 20px; font-size:15px; line-height:1.5; white-space:pre-line; box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.notes h4{margin:0 0 8px; font:700 13px var(--body); letter-spacing:1.5px; text-transform:uppercase; color:#55525A}
+aside.n{display:none}
+@media (max-width:560px){ .bar .label{display:none} .bar{gap:8px} .bar .spacer{display:none} }
+
+/* режим печати: ?print в адресе — все слайды подряд, для PDF */
+@page{size:1920px 1080px; margin:0}
+html.print, html.print body{overflow:visible; height:auto; background:var(--bg)}
+html.print .viewport{position:static; overflow:visible}
+html.print .stage{position:static; transform:none !important; height:auto}
+html.print .slide{display:block; position:relative; width:1920px; height:1080px; break-after:page}
+html.print .slide:last-child{break-after:auto}
+html.print .bar, html.print .notes, html.print .btn, html.print .mv, html.print .sbar, html.print .screen-only{display:none !important}
+html.print *, html.print *::before, html.print *::after{animation:none !important; transition:none !important}
+html.print body{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+
+</style>
+
+<div class="viewport">
+<div class="stage" id="stage">
+
+<!-- Обложка -->
+<section class="slide" data-era="16">
+  <svg class="a in" style="left:1160px; top:170px; --i:1" width="600" height="620" viewBox="0 0 600 620" aria-label="Шестерёнка, колос и лампочка — линейная иллюстрация">
+    <circle cx="300" cy="330" r="260" fill="#FFD8CA"/>
+    <path d="M60 130 l30 0 M75 115 l0 30 M520 100 l24 0 M532 88 l0 24" stroke="#1C1B1F" stroke-width="6" stroke-linecap="round"/>
+    <g transform="translate(220 360)">
+      <path d="M-20 -150 h40 l8 36 l30 14 l32 -20 l28 28 l-20 32 l14 30 l36 8 v40 l-36 8 l-14 30 l20 32 l-28 28 l-32 -20 l-30 14 l-8 36 h-40 l-8 -36 l-30 -14 l-32 20 l-28 -28 l20 -32 l-14 -30 l-36 -8 v-40 l36 -8 l14 -30 l-20 -32 l28 -28 l32 20 l30 -14 Z" transform="scale(0.9)" fill="#FCFBF8" stroke="#1C1B1F" stroke-width="6" stroke-linejoin="round"/>
+      <circle r="44" fill="#F2542D" stroke="#1C1B1F" stroke-width="6"/>
+    </g>
+    <path d="M430 520 C430 420 420 330 400 240" fill="none" stroke="#1C1B1F" stroke-width="6" stroke-linecap="round"/>
+    <g fill="#F2542D" stroke="#1C1B1F" stroke-width="5" stroke-linejoin="round">
+      <path d="M404 250 q-34 -14 -30 -50 q30 10 30 50 Z"/><path d="M406 250 q30 -20 22 -54 q-26 16 -22 54 Z"/>
+      <path d="M412 300 q-34 -14 -30 -50 q30 10 30 50 Z"/><path d="M414 300 q30 -20 22 -54 q-26 16 -22 54 Z"/>
+      <path d="M420 350 q-34 -14 -30 -50 q30 10 30 50 Z"/><path d="M422 350 q30 -20 22 -54 q-26 16 -22 54 Z"/>
+    </g>
+    <circle cx="300" cy="120" r="56" fill="#3B5BDB" stroke="#1C1B1F" stroke-width="6"/>
+    <rect x="278" y="170" width="44" height="40" rx="6" fill="#FCFBF8" stroke="#1C1B1F" stroke-width="6"/>
+    <path d="M286 120 l14 -18 l14 18 M300 102 v-0" fill="none" stroke="#FCFBF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M220 70 l-20 -16 M380 70 l20 -16 M300 40 v-24" stroke="#1C1B1F" stroke-width="6" stroke-linecap="round"/>
+  </svg>
+  <p class="a pill in" style="left:128px; top:240px; font-size:24px; font-weight:600; padding:10px 24px">Советская Россия · 1917–1921</p>
+  <h1 class="a in" style="left:128px; top:330px; font:800 140px/1 var(--display); letter-spacing:-2px; text-transform:uppercase; --i:1">Военный</h1>
+  <div class="a slidein" style="left:128px; top:502px; transform:rotate(-2deg)">
+    <p style="font:800 120px/1 var(--display); letter-spacing:-2px; text-transform:uppercase; background:var(--accent); border:4px solid var(--ink); border-radius:28px; padding:12px 44px 22px; box-shadow:10px 10px 0 var(--ink)">коммунизм</p>
+  </div>
+  <div class="a in" style="left:128px; top:730px; display:flex; gap:20px; --i:3">
+    <p class="pill" style="font-size:28px; padding:12px 28px">Термины и даты</p>
+    <p class="pill" style="font-size:28px; padding:12px 28px; background:var(--ink); color:#F3F1EC">Подготовка к контрольной</p>
+  </div>
+  <div class="a pop" style="left:930px; top:100px; width:220px; height:220px; transform:rotate(10deg); --i:6">
+    <svg width="220" height="220" viewBox="0 0 220 220" aria-hidden="true" style="position:absolute; inset:0"><path d="M210 110 L189.2 131.2 L196.6 160 L168 168 L160 196.6 L131.2 189.2 L110 210 L88.8 189.2 L60 196.6 L52 168 L23.4 160 L30.8 131.2 L10 110 L30.8 88.8 L23.4 60 L52 52 L60 23.4 L88.8 30.8 L110 10 L131.2 30.8 L160 23.4 L168 52 L196.6 60 L189.2 88.8 Z" fill="#F2542D" stroke="#1C1B1F" stroke-width="5" stroke-linejoin="round"/></svg>
+    <p style="position:absolute; inset:0; padding-top:66px; font:800 40px/1.1 var(--display); text-align:center; text-transform:uppercase">XX<br>век</p>
+  </div>
+  <p class="a" style="left:128px; top:870px; font-size:24px; color:var(--muted)">Валерия Храпова</p>
+</section>
+
+<!-- План -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 02</span></div>
+  <h2 class="a in" style="left:128px; top:128px; font:800 96px/1.05 var(--display); text-transform:uppercase">План<br>занятия</h2>
+  <p class="a in" style="left:128px; top:370px; width:620px; color:var(--muted); line-height:1.4; --i:1">Экономика Советской России с конца 1917 до 1920 года.</p>
+  <p class="a hand in" style="left:128px; top:560px; width:620px; transform:rotate(-2deg); --i:2">слова с пометкой «запомни» точно встретятся на контрольной</p>
+  <div class="a" style="left:864px; top:128px; width:928px; display:flex; flex-direction:column; gap:22px">
+    <div class="in" style="display:flex; align-items:center; gap:28px; --i:2"><div class="circle">01</div><p style="font-size:32px; font-weight:600">Термины и даты: что спросят</p></div>
+    <div class="in" style="display:flex; align-items:center; gap:28px; --i:3"><div class="circle">02</div><p style="font-size:32px; font-weight:600">Рабочий контроль</p></div>
+    <div class="in" style="display:flex; align-items:center; gap:28px; --i:4"><div class="circle">03</div><p style="font-size:32px; font-weight:600">Национализация и ВСНХ</p></div>
+    <div class="in" style="display:flex; align-items:center; gap:28px; --i:5"><div class="circle">04</div><p style="font-size:32px; font-weight:600">«Военный коммунизм» в городе</p></div>
+    <div class="in" style="display:flex; align-items:center; gap:28px; --i:6"><div class="circle">05</div><p style="font-size:32px; font-weight:600">В деревне: продразвёрстка</p></div>
+    <div class="in" style="display:flex; align-items:center; gap:28px; --i:7"><div class="circle">06</div><p style="font-size:32px; font-weight:600">План ГОЭЛРО</p></div>
+    <div class="in" style="display:flex; align-items:center; gap:28px; --i:8"><div class="circle">07</div><p style="font-size:32px; font-weight:600">Тренировка перед контрольной</p></div>
+  </div>
+</section>
+
+<!-- Что спросят -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 03</span></div>
+  <h2 class="title in">Что точно спросят</h2>
+  <div class="body">
+    <div class="policy">
+      <div class="pol in" style="--i:1"><p class="pol-h">Ключевые термины</p>
+        <div class="card"><ul>
+          <li>рабочий контроль</li>
+          <li>национализация</li>
+          <li>продотряды</li>
+          <li>комбеды</li>
+          <li>«военный коммунизм»</li>
+          <li>продразвёрстка</li>
+          <li>ВСНХ — Высший совет народного хозяйства</li>
+          <li>ГОЭЛРО — Государственная комиссия по электрификации России</li>
+        </ul></div>
+      </div>
+      <div class="pol in" style="--i:2"><p class="pol-h ext">Даты</p>
+        <div class="card tint"><div style="display:grid; grid-template-columns:270px 1fr; gap:10px 18px; font-size:25px">
+          <b class="year" style="font-size:27px">декабрь 1917</b><span>создание ВСНХ</span>
+          <b class="year" style="font-size:27px">февраль 1918</b><span>закон о социализации земли</span>
+          <b class="year" style="font-size:27px">октябрь 1918</b><span>распад Австро-Венгрии</span>
+          <b class="year" style="font-size:27px">ноябрь 1918</b><span>начало революции в Германии</span>
+          <b class="year" style="font-size:27px">январь 1919</b><span>введение продразвёрстки</span>
+          <b class="year" style="font-size:27px">март–август 1919</b><span>Венгерская Советская Республика</span>
+          <b class="year" style="font-size:27px">июнь–июль 1919</b><span>Словацкая Советская Республика</span>
+          <b class="year" style="font-size:27px">1920</b><span>принятие плана ГОЭЛРО</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Переходный период -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 04</span></div>
+  <h2 class="title in">Переходный период</h2>
+  <div class="body" style="gap:24px">
+    <p class="sub in" style="--i:1">Многие процессы идут постепенно. После победы революции программа партии говорила о переходном периоде — шагах к главной цели.</p>
+    <div class="chain in" style="--i:2"><span class="step"><b>Цель</b> · ликвидировать частную собственность</span><span class="to">→</span><span class="step">управлять будут рабочие и крестьяне</span></div>
+    <div class="row">
+      <div class="card grow hover-card in" style="--i:3"><span class="k">Первоочередная мера 1</span><h3>Рабочий контроль</h3><p style="font-size:26px">над производством</p></div>
+      <div class="card grow hover-card in" style="--i:4"><span class="k">Первоочередная мера 2</span><h3>Национализация банков</h3><p style="font-size:26px">банки переходят государству</p></div>
+    </div>
+    <div class="qa inline in" style="--i:5"><span class="ql">Вопрос</span><p class="qq">Что такое частная собственность?</p><button class="ans"><span class="q">открыть</span><span class="v">Имущество, которое принадлежит отдельному человеку, а не государству</span></button></div>
+  </div>
+</section>
+
+<!-- Рабочий контроль -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 05</span></div>
+  <h2 class="title in">Рабочий контроль</h2>
+  <div class="body" style="gap:22px">
+    <div class="card in" style="--i:1; flex-direction:row; align-items:center; gap:24px; padding:16px 26px"><span class="big-year" style="font-size:44px; flex:none">весна–лето 1917</span><p style="font-size:26px">На крупных фабриках уже возникают <b>фабзавкомы</b> — фабрично-заводские комитеты. Теперь рабочий контроль — <b>обязательная мера</b>.</p></div>
+    <p class="sub in" style="--i:2">Рабочие получили право:</p>
+    <div class="row">
+      <div class="card grow hover-card in" style="--i:3"><span><span class="num">01</span></span><h3>Проверять финансы</h3><p style="font-size:25px">знакомиться с финансовой документацией</p></div>
+      <div class="card grow hover-card in" style="--i:4"><span><span class="num">02</span></span><h3>Нормы выработки</h3><p style="font-size:25px">устанавливать, сколько нужно произвести</p></div>
+      <div class="card grow hover-card in" style="--i:5"><span><span class="num">03</span></span><h3>Кадры</h3><p style="font-size:25px">решать, кого нанимать и увольнять</p></div>
+    </div>
+    <p class="hand in" style="--i:6">! решения органов рабочего контроля обязательны для предпринимателей</p>
+  </div>
+</section>
+
+<!-- Ответ владельцев -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 06</span></div>
+  <h2 class="title in">Как ответили владельцы</h2>
+  <div class="body" style="gap:24px">
+    <div class="qa inline in" style="--i:1"><span class="ql">Вопрос</span><p class="qq">Если бы фабрика была твоей, тебе бы это понравилось? Что делать владельцу?</p><button class="ans"><span class="q">открыть</span><span class="v">Скорее всего, нет — и владельцы стали спасать деньги</span></button></div>
+    <div class="chain in" style="--i:2"><span class="step">останавливают заводы</span><span class="to">→</span><span class="step">продают сырьё</span><span class="to">→</span><span class="step">уезжают за границу</span><span class="to">→</span><span class="step" style="background:var(--blue-tint)">ответ — национализация</span></div>
+    <div class="term in" style="--i:3"><b>Национализация</b> — переход частной собственности в собственность государства.</div>
+    <p class="hand in" style="--i:4">запомни этот термин — он точно будет на контрольной</p>
+  </div>
+</section>
+
+<!-- Первые национализации и СНК -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 07</span></div>
+  <h2 class="title in">Кто национализирует</h2>
+  <div class="body">
+    <div class="row" style="flex:1; gap:40px">
+      <div class="col grow" style="gap:20px">
+        <div class="card tint in" style="--i:1; font-size:26px"><span class="k">СНК — Совет народных комиссаров</span><h3>Правительство</h3><p>Высший исполнительный орган власти. До 1936 года ещё и законодательный: мог издавать декреты.</p></div>
+        <div class="card in" style="--i:2; flex-direction:row; gap:22px; padding:16px 24px; font-size:26px"><span class="year" style="width:250px; flex:none; font-size:30px; white-space:nowrap">ноябрь 1917</span><p>Национализирована фабрика товарищества <b>Ликинской мануфактуры</b> (возле Орехова-Зуева)</p></div>
+        <div class="card in" style="--i:3; flex-direction:row; gap:22px; padding:16px 24px; font-size:26px"><span class="year" style="width:250px; flex:none; font-size:30px; white-space:nowrap">декабрь 1917</span><p>Ряд предприятий на <b>Урале</b> и <b>Путиловский завод</b></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ВСНХ -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 08</span></div>
+  <h2 class="title in">ВСНХ</h2>
+  <div class="body" style="gap:22px">
+    <div class="term in" style="--i:1"><b>ВСНХ — Высший совет народного хозяйства</b> — государственный орган, который управлял всей экономикой. Создан в начале <b>декабря 1917 года</b> — первый такой случай в мировой экономике.</div>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px">
+      <div class="card hover-card in" style="--i:2"><span class="k">Чем занимался</span><h3>Управление промышленностью</h3><p style="font-size:25px">После национализации руководил фабриками и заводами</p></div>
+      <div class="card hover-card in" style="--i:3"><span class="k">Внутри ВСНХ</span><h3>Главки и центры</h3><p style="font-size:25px">Отраслевые отделы: управляли целыми отраслями, учитывали и распределяли продукцию</p></div>
+      <div class="card hover-card in" style="--i:4"><span class="k">На местах</span><h3>Совнархозы</h3><p style="font-size:25px">Территориальные советы народного хозяйства</p></div>
+    </div>
+    <div class="qa inline in" style="--i:5"><span class="ql">Вопрос</span><p class="qq">Как расшифровать «совнархоз»?</p><button class="ans"><span class="q">открыть</span><span class="v">Совет народного хозяйства — как ВСНХ, только местный</span></button></div>
+  </div>
+</section>
+
+<!-- Последовательность национализации -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 09</span></div>
+  <h2 class="title in">Что за чем забирали</h2>
+  <div class="body" style="gap:14px">
+    <p class="sub in" style="--i:1">Запомни последовательность национализации.</p>
+    <div class="card in" style="--i:2; flex-direction:row; gap:22px; padding:12px 24px; font-size:25px; align-items:center"><span class="year" style="width:350px; flex:none; font-size:28px; white-space:nowrap">ноябрь–декабрь 1917</span><p>отдельные фабрики и заводы</p></div>
+    <div class="card in" style="--i:3; flex-direction:row; gap:22px; padding:12px 24px; font-size:25px; align-items:center"><span class="year" style="width:350px; flex:none; font-size:28px; white-space:nowrap">декабрь 1917</span><p><b>банки</b>: банковское дело — государственная монополия, Государственный банк стал Народным</p></div>
+    <div class="card in" style="--i:4; flex-direction:row; gap:22px; padding:12px 24px; font-size:25px; align-items:center"><span class="year" style="width:350px; flex:none; font-size:28px; white-space:nowrap">январь–апрель 1918</span><p><b>транспорт</b>: железные дороги, речной и морской флот</p></div>
+    <div class="card in" style="--i:5; flex-direction:row; gap:22px; padding:12px 24px; font-size:25px; align-items:center"><span class="year" style="width:350px; flex:none; font-size:28px; white-space:nowrap">1918</span><p><b>монополия внешней торговли</b>: торговать с заграницей может только государство</p></div>
+    <div class="card in" style="--i:6; flex-direction:row; gap:22px; padding:12px 24px; font-size:25px; align-items:center"><span class="year" style="width:350px; flex:none; font-size:28px; white-space:nowrap">лето 1918</span><p>все <b>крупные предприятия</b> важнейших отраслей</p></div>
+    <div class="card tint in" style="--i:7; flex-direction:row; gap:22px; padding:12px 24px; font-size:25px; align-items:center"><span class="year" style="width:350px; flex:none; font-size:28px; white-space:nowrap">август 1918</span><p>отмена частной собственности на <b>недвижимость в городах</b>: домкомы, коммуналки</p></div>
+  </div>
+</section>
+
+<!-- Задание: последовательность -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 10</span></div>
+  <h2 class="title in">Расставь по порядку</h2>
+  <p class="a in" style="left:128px; top:236px; width:1000px; font-weight:700; --i:1">Что национализировали раньше? Перетаскивай строки.</p>
+  <div class="sortable" data-h="80" style="left:128px; top:300px; width:1000px">
+    <div class="srow" data-pos="4">Крупные предприятия важнейших отраслей</div>
+    <div class="srow" data-pos="2">Частные банки</div>
+    <div class="srow" data-pos="5">Недвижимость в городах</div>
+    <div class="srow" data-pos="1">Фабрика Ликинской мануфактуры</div>
+    <div class="srow" data-pos="3">Железные дороги, речной и морской флот</div>
+  </div>
+  <div class="a col" style="left:1200px; top:300px; width:592px">
+    <div class="card tint in" style="--i:2"><span class="k">Подсказка</span><p style="font-size:28px">Сначала одна фабрика, в конце — даже квартиры в городах.</p></div>
+    <p class="hand in" style="--i:3; transform:rotate(-2deg)">а теперь назови месяц и год для каждой строки</p>
+  </div>
+</section>
+
+<!-- Задание: термин по определению -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 11</span></div>
+  <h2 class="title in">Назови термин</h2>
+  <div class="body task" style="gap:18px">
+    <p class="in" style="--i:1; font-weight:700">Впиши термин или сокращение.</p>
+    <div class="row in" style="--i:2; align-items:flex-start">
+      <table class="tbl grow" style="font-size:24px">
+        <tr><th>Определение</th><th style="width:280px">Термин</th></tr>
+        <tr><td>Переход частной собственности в собственность государства</td><td><input class="fld txt" data-answer="национализация" placeholder="?" style="width:230px"><span class="cellans reveal-on-check">национализация</span></td></tr>
+        <tr><td>Государственный орган управления всем народным хозяйством, декабрь 1917</td><td><input class="fld txt" data-answer="ВСНХ|Высший совет народного хозяйства" placeholder="?" style="width:230px"><span class="cellans reveal-on-check">ВСНХ</span></td></tr>
+        <tr><td>Отделы внутри ВСНХ, управлявшие целыми отраслями</td><td><input class="fld txt" data-answer="главки|главки и центры|центры" placeholder="?" style="width:230px"><span class="cellans reveal-on-check">главки</span></td></tr>
+      </table>
+      <table class="tbl grow" style="font-size:24px">
+        <tr><th>Определение</th><th style="width:280px">Термин</th></tr>
+        <tr><td>Местные советы народного хозяйства</td><td><input class="fld txt" data-answer="совнархозы|совнархоз" placeholder="?" style="width:230px"><span class="cellans reveal-on-check">совнархозы</span></td></tr>
+        <tr><td>Фабрично-заводские комитеты рабочих</td><td><input class="fld txt" data-answer="фабзавкомы|фабзавком" placeholder="?" style="width:230px"><span class="cellans reveal-on-check">фабзавкомы</span></td></tr>
+        <tr><td>Совет народных комиссаров — правительство</td><td><input class="fld txt" data-answer="СНК|Совнарком" placeholder="?" style="width:230px"><span class="cellans reveal-on-check">СНК</span></td></tr>
+      </table>
+    </div>
+    <div class="taskbar"></div>
+  </div>
+</section>
+
+<!-- Военный коммунизм -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 12</span></div>
+  <h2 class="title in">«Военный коммунизм»</h2>
+  <div class="body" style="gap:24px">
+    <div class="term in" style="--i:1"><b>«Военный коммунизм»</b> — социально-экономическая политика советской власти в период Гражданской войны.</div>
+    <div class="row">
+      <div class="card grow hover-card in" style="--i:2"><span><span class="num">01</span></span><h3>Всё для фронта</h3><p style="font-size:26px">Вся промышленность подчинена нуждам фронта</p></div>
+      <div class="card grow hover-card in" style="--i:3"><span><span class="num">02</span></span><h3>Трудовая повинность</h3><p style="font-size:26px">Всеобщая трудовая повинность и трудовая мобилизация</p></div>
+      <div class="card grow hover-card in" style="--i:4"><span><span class="num">03</span></span><h3>От 16 до 50 лет</h3><p style="font-size:26px">Возраст, с которого и до которого мобилизовали на работу</p></div>
+    </div>
+    <div class="qa inline in" style="--i:5"><span class="ql">Вопрос</span><p class="qq">Почему политику назвали «военной»?</p><button class="ans"><span class="q">открыть</span><span class="v">Её проводили во время Гражданской войны, всё подчиняли нуждам фронта</span></button></div>
+  </div>
+</section>
+
+<!-- VIII съезд -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 13</span></div>
+  <h2 class="title in">Жизнь без денег</h2>
+  <div class="body" style="gap:22px">
+    <div class="card tint in" style="--i:1; flex-direction:row; align-items:center; gap:24px; padding:16px 26px"><span class="big-year" style="font-size:56px; flex:none">1919</span><p style="font-size:26px">VIII съезд РКП(б) принимает новую Программу партии: <b>торговлю заменить распределением продуктов</b> в масштабах всей страны.</p></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px">
+      <div class="card hover-card in" style="--i:2; padding:18px 24px"><h3>Зарплата — пайком</h3><p style="font-size:25px">вместо денег: продуктовый паёк, талоны в столовую, предметы первой необходимости</p></div>
+      <div class="card hover-card in" style="--i:3; padding:18px 24px"><h3>Бесплатные услуги</h3><p style="font-size:25px">отменена плата за жильё, транспорт, коммунальные услуги</p></div>
+      <div class="card hover-card in" style="--i:4; padding:18px 24px"><h3>Запрет торговли</h3><p style="font-size:25px">свободно продавать нельзя продовольствие, а потом и другие товары</p></div>
+      <div class="card hover-card in" style="--i:5; padding:18px 24px"><h3>Государство кормит</h3><p style="font-size:25px">мобилизовав рабочих, берёт на себя их полное содержание</p></div>
+    </div>
+    <p class="hand in" style="--i:6">большевики пытались уйти от товарно-денежных отношений — к прямому распределению</p>
+  </div>
+</section>
+
+<!-- Задание: что относится -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 14</span></div>
+  <h2 class="title in">Это «военный коммунизм»?</h2>
+  <div class="body task">
+    <p class="in" style="--i:1; font-weight:700">Отметь только меры политики «военного коммунизма».</p>
+    <div class="in" style="--i:2; display:grid; grid-template-columns:1fr 1fr; gap:16px 24px">
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:26px">Продуктовый паёк вместо зарплаты деньгами</span></button>
+      <button class="opt" data-correct="0"><span class="box"></span><span style="font-size:26px">Разрешение свободной торговли хлебом</span></button>
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:26px">Всеобщая трудовая повинность</span></button>
+      <button class="opt" data-correct="0"><span class="box"></span><span style="font-size:26px">Возврат фабрик прежним владельцам</span></button>
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:26px">Отмена платы за жильё и транспорт</span></button>
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:26px">Продразвёрстка</span></button>
+    </div>
+    <div class="taskbar"></div>
+    <div class="answer reveal-on-check"><b>Верно:</b> паёк, трудовая повинность, бесплатные жильё и транспорт, продразвёрстка. Свободная торговля была запрещена, а фабрики не возвращали — их национализировали.</div>
+  </div>
+</section>
+
+<!-- Социализация земли -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 15</span></div>
+  <h2 class="title in">В деревне: земля</h2>
+  <div class="body" style="gap:22px">
+    <div class="card tint in" style="--i:1; flex-direction:row; align-items:center; gap:24px; padding:16px 26px"><span class="big-year" style="font-size:44px; flex:none">27 января (9 февраля) 1918</span><p style="font-size:26px">ВЦИК принимает закон <b>«О социализации земли»</b>. Он подтверждает Декрет о земле.</p></div>
+    <div class="row">
+      <div class="card grow hover-card in" style="--i:2"><span><span class="num">01</span></span><h3>Собственности нет</h3><p style="font-size:26px">Отменена навсегда любая собственность на землю, недра, воды и леса</p></div>
+      <div class="card grow hover-card in" style="--i:3"><span><span class="num">02</span></span><h3>Земля — народу</h3><p style="font-size:26px">Переходит в пользование всего народа — но только тех, кто сам её обрабатывает</p></div>
+      <div class="card grow hover-card in" style="--i:4"><span><span class="num">03</span></span><h3>На деле</h3><p style="font-size:26px">Фактически собственником земли становится государство</p></div>
+    </div>
+    <div class="qa inline in" style="--i:5"><span class="ql">Вопрос</span><p class="qq">Почему в законе две даты?</p><button class="ans"><span class="q">открыть</span><span class="v">Старый и новый стиль: с февраля 1918 года — новый календарь</span></button></div>
+  </div>
+</section>
+
+<!-- Голод -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 16</span></div>
+  <h2 class="title in">Голод в городах</h2>
+  <div class="body" style="gap:22px">
+    <div class="chain in" style="--i:1"><span class="step">мало продовольствия</span><span class="to">→</span><span class="step"><b>карточная система</b></span><span class="to">→</span><span class="step">нормы хлеба падают</span><span class="to">→</span><span class="step" style="background:var(--blue-tint)">голод</span></div>
+    <div class="row">
+      <div class="card grow in" style="--i:2; align-items:center; text-align:center"><span class="k">Петроград, весна 1918</span><p class="big-year" style="font-size:96px">50 г</p><p style="font-size:26px">хлеба в сутки</p></div>
+      <div class="card grow in" style="--i:3; align-items:center; text-align:center"><span class="k">Москва, весна 1918</span><p class="big-year" style="font-size:96px">100 г</p><p style="font-size:26px">хлеба в сутки у рабочих</p></div>
+      <div class="card grow tint in" style="--i:4"><span class="k">Ответ СНК</span><h3>Наркомпрод</h3><p style="font-size:25px">получает чрезвычайные полномочия: <b>хлебная монополия</b>, изъятие излишков по «твёрдым ценам»</p></div>
+    </div>
+    <p class="hand in" style="--i:5">50 г — это примерно один тонкий ломтик хлеба на весь день</p>
+  </div>
+</section>
+
+<!-- Продразвёрстка -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 17</span></div>
+  <h2 class="title in">Продразвёрстка</h2>
+  <div class="body" style="gap:20px">
+    <div class="term in" style="--i:1"><b>Продразвёрстка</b> — обязательная сдача крестьянами государству хлеба и других продуктов по «твёрдым» (государственным) ценам. Введена в <b>январе 1919 года</b>.</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px">
+      <div class="card hover-card in" style="--i:2; padding:18px 24px"><span><span class="num">01</span></span><h3>«Сколько нужно — столько сдадите»</h3><p style="font-size:24px">не добровольная продажа, а повинность — как налог, только продуктами</p></div>
+      <div class="card hover-card in" style="--i:3; padding:18px 24px"><span><span class="num">02</span></span><h3>Излишки определяет государство</h3><p style="font-size:24px">а не сам крестьянин</p></div>
+      <div class="card hover-card in" style="--i:4; padding:18px 24px"><span><span class="num">03</span></span><h3>Цена — «твёрдая»</h3><p style="font-size:24px">деньги обесценились, товаров нет — по сути, бесплатно</p></div>
+      <div class="card hover-card in" style="--i:5; padding:18px 24px"><span><span class="num">04</span></span><h3>Исполнители</h3><p style="font-size:24px">продотряды вместе с местными Советами и комбедами</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Как развёрстывали -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 18</span></div>
+  <h2 class="title in">Как «развёрстывали»</h2>
+  <div class="body" style="gap:24px">
+    <p class="sub in" style="--i:1">В Москве решали, сколько хлеба нужно стране, и раскладывали цифру сверху вниз:</p>
+    <div class="chain in" style="--i:2"><span class="step"><b>Москва</b></span><span class="to">→</span><span class="step">губерния</span><span class="to">→</span><span class="step">уезд</span><span class="to">→</span><span class="step">волость</span><span class="to">→</span><span class="step" style="background:var(--blue-tint)">село: сдать столько-то пудов</span></div>
+    <p class="sub in" style="--i:3">Декрет СНК начала 1919 года: с кого сколько брать</p>
+    <div class="row">
+      <div class="card grow hover-card in" style="--i:4; align-items:center; text-align:center"><span class="k">Бедняк</span><h3>Ничего</h3></div>
+      <div class="card grow hover-card in" style="--i:5; align-items:center; text-align:center"><span class="k">Середняк</span><h3>Умеренно</h3></div>
+      <div class="card grow hover-card in" style="--i:6; align-items:center; text-align:center"><span class="k">Богатый</span><h3>Много</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- Продотряды и комбеды -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 19</span></div>
+  <h2 class="title in">Продотряды и комбеды</h2>
+  <div class="body">
+    <div class="row" style="flex:1; gap:40px">
+      <div class="col grow" style="gap:20px">
+        <div class="term in" style="--i:1"><b>Продотряды</b> — продовольственные отряды: вооружённые рабочие, которых посылали в деревню забирать хлеб.</div>
+        <div class="term in" style="--i:2"><b>Комбеды</b> — комитеты бедноты: помогали продотрядам найти хлеб у зажиточных соседей.</div>
+        <div class="card in" style="--i:3; font-size:25px"><span class="k">Как это выглядело</span><p>Ходили по дворам, проверяли амбары, устраивали обыски, забирали зерно. За сопротивление — арест, конфискация, сила.</p></div>
+        <div class="qa inline in" style="--i:4"><span class="ql">Вопрос</span><p class="qq">Как к этому отнеслись крестьяне?</p><button class="ans"><span class="q">открыть</span><span class="v">Плохо — начались крестьянские восстания</span></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Задание: кто это -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 20</span></div>
+  <h2 class="title in">Кто или что это?</h2>
+  <div class="body task" style="gap:18px">
+    <p class="in" style="--i:1; font-weight:700">Впиши термин.</p>
+    <table class="tbl in" style="--i:2; font-size:25px">
+      <tr><th>Описание</th><th style="width:420px">Термин</th></tr>
+      <tr><td>Вооружённые рабочие, которых посылали в деревню за хлебом</td><td><input class="fld txt" data-answer="продотряды|продотряд" placeholder="?" style="width:320px"><span class="cellans reveal-on-check">продотряды</span></td></tr>
+      <tr><td>Комитеты бедноты в деревне</td><td><input class="fld txt" data-answer="комбеды|комбед" placeholder="?" style="width:320px"><span class="cellans reveal-on-check">комбеды</span></td></tr>
+      <tr><td>Обязательная сдача хлеба государству по «твёрдым» ценам</td><td><input class="fld txt" data-answer="продразвёрстка|продразверстка|продовольственная развёрстка" placeholder="?" style="width:320px"><span class="cellans reveal-on-check">продразвёрстка</span></td></tr>
+      <tr><td>Нарком, получивший чрезвычайные полномочия, — Народный комиссариат продовольствия</td><td><input class="fld txt" data-answer="Наркомпрод" placeholder="?" style="width:320px"><span class="cellans reveal-on-check">Наркомпрод</span></td></tr>
+      <tr><td>Система, когда продукты выдают по карточкам</td><td><input class="fld txt" data-answer="карточная|карточная система" placeholder="?" style="width:320px"><span class="cellans reveal-on-check">карточная система</span></td></tr>
+    </table>
+    <div class="taskbar"></div>
+  </div>
+</section>
+
+<!-- ГОЭЛРО -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 21</span></div>
+  <h2 class="title in">План ГОЭЛРО</h2>
+  <div class="body">
+    <div class="row" style="flex:1; gap:40px">
+      <div class="col grow" style="gap:16px">
+        <div class="term in" style="--i:1"><b>ГОЭЛРО</b> — Государственная комиссия по электрификации России. Создана в <b>феврале 1920 года</b>, возглавил инженер-энергетик <b>Г. Кржижановский</b>.</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px">
+          <div class="card hover-card in" style="--i:2; padding:16px 22px"><span class="k">Срок</span><h3>10–15 лет</h3></div>
+          <div class="card hover-card in" style="--i:3; padding:16px 22px"><span class="k">Электростанции</span><h3>20 ТЭС + 10 ГЭС</h3></div>
+          <div class="card hover-card in" style="--i:4; padding:16px 22px"><span class="k">ГЭС на реках</span><h3 style="font-size:28px">Волга, Днепр, Волхов, Свирь</h3></div>
+          <div class="card hover-card in" style="--i:5; padding:16px 22px"><span class="k">Электроэнергии</span><h3>в 4,5 раза больше 1913 г.</h3></div>
+        </div>
+        <div class="card tint in" style="--i:6; flex-direction:row; align-items:center; gap:22px; padding:14px 24px"><span class="big-year" style="font-size:52px">1931</span><p style="font-size:25px">план перевыполнен, создана единая энергосистема. ГОЭЛРО — <b>первый государственный план</b> в Советской России</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Задание ГОЭЛРО -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 22</span></div>
+  <h2 class="title in">ГОЭЛРО в цифрах</h2>
+  <div class="body task" style="gap:18px">
+    <p class="in" style="--i:1; font-weight:700">Впиши ответ.</p>
+    <div class="row in" style="--i:2; align-items:flex-start">
+      <table class="tbl grow" style="font-size:25px">
+        <tr><th>Вопрос</th><th style="width:280px">Ответ</th></tr>
+        <tr><td>В каком году создана комиссия?</td><td><input class="fld txt" data-answer="1920" placeholder="?" style="width:220px"><span class="cellans reveal-on-check">1920</span></td></tr>
+        <tr><td>Кто её возглавил? (фамилия)</td><td><input class="fld txt" data-answer="Кржижановский|Г. Кржижановский" placeholder="?" style="width:220px"><span class="cellans reveal-on-check">Кржижановский</span></td></tr>
+        <tr><td>Сколько тепловых станций?</td><td><input class="fld txt" data-answer="20" placeholder="?" style="width:220px"><span class="cellans reveal-on-check">20</span></td></tr>
+      </table>
+      <table class="tbl grow" style="font-size:25px">
+        <tr><th>Вопрос</th><th style="width:280px">Ответ</th></tr>
+        <tr><td>Сколько гидростанций?</td><td><input class="fld txt" data-answer="10" placeholder="?" style="width:220px"><span class="cellans reveal-on-check">10</span></td></tr>
+        <tr><td>Во сколько раз больше энергии, чем в 1913?</td><td><input class="fld txt" data-answer="4,5|4.5" placeholder="?" style="width:220px"><span class="cellans reveal-on-check">4,5</span></td></tr>
+        <tr><td>К какому году перевыполнен?</td><td><input class="fld txt" data-answer="1931" placeholder="?" style="width:220px"><span class="cellans reveal-on-check">1931</span></td></tr>
+      </table>
+    </div>
+    <div class="taskbar"></div>
+  </div>
+</section>
+
+<!-- Мир вокруг -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 23</span></div>
+  <h2 class="title in">А в это время в Европе</h2>
+  <div class="body" style="gap:22px">
+    <p class="sub in" style="--i:1">Даты из списка «что спросят»: революции и распады в Европе после Первой мировой.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px">
+      <div class="card hover-card in" style="--i:2; flex-direction:row; align-items:center; gap:22px"><span class="year" style="width:330px; flex:none; font-size:30px; white-space:nowrap">октябрь 1918</span><p style="font-size:26px">распад Австро-Венгрии</p></div>
+      <div class="card hover-card in" style="--i:3; flex-direction:row; align-items:center; gap:22px"><span class="year" style="width:330px; flex:none; font-size:30px; white-space:nowrap">ноябрь 1918</span><p style="font-size:26px">начало революции в Германии</p></div>
+      <div class="card hover-card in" style="--i:4; flex-direction:row; align-items:center; gap:22px"><span class="year" style="width:330px; flex:none; font-size:30px; white-space:nowrap">март–август 1919</span><p style="font-size:26px">Венгерская Советская Республика</p></div>
+      <div class="card hover-card in" style="--i:5; flex-direction:row; align-items:center; gap:22px"><span class="year" style="width:330px; flex:none; font-size:30px; white-space:nowrap">июнь–июль 1919</span><p style="font-size:26px">Словацкая Советская Республика</p></div>
+    </div>
+    <div class="qa inline in" style="--i:6"><span class="ql">Вопрос</span><p class="qq">Почему большевиков радовали эти события?</p><button class="ans"><span class="q">открыть</span><span class="v">Они ждали мировой революции и надеялись на поддержку в Европе</span></button></div>
+  </div>
+</section>
+
+<!-- Тренировка: дата → событие -->
+<section class="slide accent" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 24</span></div>
+  <p class="a in" style="left:128px; top:360px; font:700 72px/1 var(--hand); transform:rotate(-2deg)">тренировка перед контрольной</p>
+  <h2 class="a in" style="left:128px; top:460px; width:1664px; font:800 120px/1.05 var(--display); text-transform:uppercase; --i:1">Проверь себя</h2>
+</section>
+
+<!-- Дата → событие -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 25</span></div>
+  <h2 class="title in">Дата → событие</h2>
+  <div class="body" style="gap:20px">
+    <div class="flips in" style="--i:1; grid-template-columns:repeat(4, 1fr); --fh:170px">
+      <button class="flip"><span class="big-year" style="font-size:40px">ноябрь 1917</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Ликинская мануфактура национализирована</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">декабрь 1917</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Создание ВСНХ</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">февраль 1918</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Закон о социализации земли</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">лето 1918</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Национализация крупной промышленности</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">август 1918</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Отмена собственности на недвижимость в городах</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">октябрь 1918</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Распад Австро-Венгрии</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">ноябрь 1918</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Начало революции в Германии</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">январь 1919</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Введение продразвёрстки</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">март–август 1919</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Венгерская Советская Республика</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">июнь–июль 1919</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">Словацкая Советская Республика</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">1920</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">План ГОЭЛРО</span></span></button>
+      <button class="flip"><span class="big-year" style="font-size:40px">1931</span><span class="hidebox block" style="min-height:76px"><span class="hv t" style="font-size:24px">ГОЭЛРО перевыполнен</span></span></button>
+    </div>
+    <div class="flipbar"></div>
+  </div>
+</section>
+
+<!-- Событие → дата -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 26</span></div>
+  <h2 class="title in">Событие → дата</h2>
+  <div class="body" style="gap:20px">
+    <div class="flips in" style="--i:1; grid-template-columns:repeat(4, 1fr); --fh:170px">
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Введение продразвёрстки</span><span class="hidebox"><span class="hv" style="font-size:30px">январь 1919</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Венгерская Советская Республика</span><span class="hidebox"><span class="hv" style="font-size:30px">март–август 1919</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Создание ВСНХ</span><span class="hidebox"><span class="hv" style="font-size:30px">декабрь 1917</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">План ГОЭЛРО</span><span class="hidebox"><span class="hv" style="font-size:30px">1920</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Начало революции в Германии</span><span class="hidebox"><span class="hv" style="font-size:30px">ноябрь 1918</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Закон о социализации земли</span><span class="hidebox"><span class="hv" style="font-size:30px">февраль 1918</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Словацкая Советская Республика</span><span class="hidebox"><span class="hv" style="font-size:30px">июнь–июль 1919</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Распад Австро-Венгрии</span><span class="hidebox"><span class="hv" style="font-size:30px">октябрь 1918</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">VIII съезд РКП(б), новая Программа</span><span class="hidebox"><span class="hv" style="font-size:30px">1919</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Отмена собственности на недвижимость в городах</span><span class="hidebox"><span class="hv" style="font-size:30px">август 1918</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Национализация транспорта и флота</span><span class="hidebox"><span class="hv" style="font-size:30px">январь–апрель 1918</span></span></button>
+      <button class="flip"><span class="ftext" style="min-height:68px; display:flex; align-items:center">Создание комиссии ГОЭЛРО</span><span class="hidebox"><span class="hv" style="font-size:30px">февраль 1920</span></span></button>
+    </div>
+    <div class="flipbar"></div>
+  </div>
+</section>
+
+<!-- Термин → определение -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 27</span></div>
+  <h2 class="title in">Термин → значение</h2>
+  <div class="body" style="gap:22px">
+    <p class="sub in" style="--i:1">Объясни своими словами, потом открой карточку.</p>
+    <div class="flips in" style="--i:2; grid-template-columns:repeat(4, 1fr); --fh:230px">
+      <button class="flip"><span class="fmain" style="font-size:30px">Рабочий контроль</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">рабочие проверяют финансы, нормы выработки и кадры предприятия</span></span></button>
+      <button class="flip"><span class="fmain" style="font-size:30px">Национализация</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">переход частной собственности в собственность государства</span></span></button>
+      <button class="flip"><span class="fmain" style="font-size:30px">ВСНХ</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">Высший совет народного хозяйства: управлял экономикой</span></span></button>
+      <button class="flip"><span class="fmain" style="font-size:30px">«Военный коммунизм»</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">социально-экономическая политика в годы Гражданской войны</span></span></button>
+      <button class="flip"><span class="fmain" style="font-size:30px">Продразвёрстка</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">обязательная сдача хлеба государству по «твёрдым» ценам</span></span></button>
+      <button class="flip"><span class="fmain" style="font-size:30px">Продотряды</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">вооружённые рабочие, забиравшие хлеб в деревне</span></span></button>
+      <button class="flip"><span class="fmain" style="font-size:30px">Комбеды</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">комитеты бедноты, помогали продотрядам</span></span></button>
+      <button class="flip"><span class="fmain" style="font-size:30px">ГОЭЛРО</span><span class="hidebox block" style="min-height:110px"><span class="hv t" style="font-size:23px">комиссия по электрификации России и её план, 1920</span></span></button>
+    </div>
+    <div class="flipbar"></div>
+  </div>
+</section>
+
+<!-- Соотнеси дату и событие -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 28</span></div>
+  <h2 class="title in">Соотнеси даты</h2>
+  <div class="body task" style="gap:18px">
+    <div class="signs in" style="--i:1"><span class="lbl">Даты</span><span class="sign">1) декабрь 1917</span><span class="sign">2) февраль 1918</span><span class="sign">3) октябрь 1918</span><span class="sign">4) январь 1919</span><span class="sign">5) 1920</span><span class="sign">6) ноябрь 1918</span></div>
+    <p class="in" style="--i:2; font-weight:700">Впиши номер даты напротив события.</p>
+    <div class="row in" style="--i:3; align-items:flex-start">
+      <table class="tbl grow" style="font-size:25px">
+        <tr><th>Событие</th><th style="width:150px">Дата</th></tr>
+        <tr><td>Введение продразвёрстки</td><td><input class="fld" data-answer="4" placeholder="?" style="width:90px"><span class="cellans reveal-on-check">4</span></td></tr>
+        <tr><td>Создание ВСНХ</td><td><input class="fld" data-answer="1" placeholder="?" style="width:90px"><span class="cellans reveal-on-check">1</span></td></tr>
+        <tr><td>Начало революции в Германии</td><td><input class="fld" data-answer="6" placeholder="?" style="width:90px"><span class="cellans reveal-on-check">6</span></td></tr>
+      </table>
+      <table class="tbl grow" style="font-size:25px">
+        <tr><th>Событие</th><th style="width:150px">Дата</th></tr>
+        <tr><td>Принятие плана ГОЭЛРО</td><td><input class="fld" data-answer="5" placeholder="?" style="width:90px"><span class="cellans reveal-on-check">5</span></td></tr>
+        <tr><td>Распад Австро-Венгрии</td><td><input class="fld" data-answer="3" placeholder="?" style="width:90px"><span class="cellans reveal-on-check">3</span></td></tr>
+        <tr><td>Закон о социализации земли</td><td><input class="fld" data-answer="2" placeholder="?" style="width:90px"><span class="cellans reveal-on-check">2</span></td></tr>
+      </table>
+    </div>
+    <div class="taskbar"></div>
+  </div>
+</section>
+
+<!-- Верные суждения -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 29</span></div>
+  <h2 class="title in">Верно или нет?</h2>
+  <div class="body task" style="gap:14px">
+    <p class="in" style="--i:1; font-weight:700">Отметь все верные утверждения.</p>
+    <div class="in" style="--i:2; display:grid; grid-template-columns:1fr 1fr; gap:14px 24px">
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:24px">ВСНХ создан в декабре 1917 года</span></button>
+      <button class="opt" data-correct="0"><span class="box"></span><span style="font-size:24px">Продразвёрстка введена в январе 1918 года</span></button>
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:24px">Комиссию ГОЭЛРО возглавил Г. Кржижановский</span></button>
+      <button class="opt" data-correct="0"><span class="box"></span><span style="font-size:24px">По продразвёрстке больше всего брали с бедняков</span></button>
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:24px">Государственный банк переименовали в Народный</span></button>
+      <button class="opt" data-correct="0"><span class="box"></span><span style="font-size:24px">План ГОЭЛРО предусматривал 30 гидроэлектростанций</span></button>
+      <button class="opt" data-correct="1"><span class="box"></span><span style="font-size:24px">Трудовая повинность касалась людей от 16 до 50 лет</span></button>
+      <button class="opt" data-correct="0"><span class="box"></span><span style="font-size:24px">Закон о социализации земли принял СНК</span></button>
+    </div>
+    <div class="taskbar"></div>
+    <div class="answer reveal-on-check" style="font-size:23px"><b>Неверно:</b> продразвёрстка — январь <b>1919</b>; с бедняков не брали ничего; ГЭС было <b>10</b> (а всего станций 30); закон о социализации земли принял <b>ВЦИК</b>.</div>
+  </div>
+</section>
+
+<!-- Хронология -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 30</span></div>
+  <h2 class="title in">Хронология</h2>
+  <p class="a in" style="left:128px; top:236px; width:1000px; font-weight:700; --i:1">Расположи события в хронологическом порядке.</p>
+  <div class="sortable" data-h="72" style="left:128px; top:300px; width:1000px">
+    <div class="srow" data-pos="4">Введение продразвёрстки</div>
+    <div class="srow" data-pos="6">Создание комиссии ГОЭЛРО</div>
+    <div class="srow" data-pos="1">Создание ВСНХ</div>
+    <div class="srow" data-pos="3">Распад Австро-Венгрии</div>
+    <div class="srow" data-pos="5">Венгерская Советская Республика</div>
+    <div class="srow" data-pos="2">Закон о социализации земли</div>
+  </div>
+  <div class="a col" style="left:1200px; top:300px; width:592px">
+    <div class="qa in" style="--i:2"><span class="ql">Вопрос</span><p class="qq">Что было раньше: продразвёрстка или революция в Германии?</p><button class="ans"><span class="q">открыть</span><span class="v">Революция в Германии: ноябрь 1918, продразвёрстка — январь 1919</span></button></div>
+  </div>
+</section>
+
+<!-- Вопросы из учебника -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 31</span></div>
+  <h2 class="title in">Вопросы из учебника</h2>
+  <div class="body" style="gap:22px">
+    <p class="sub in" style="--i:1">Ответь вслух развёрнуто, потом сверься с опорой.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px">
+      <div class="qa in" style="--i:2"><span class="ql">Вопрос 1</span><p class="qq">Чем вызвана нехватка продовольствия в городах весной 1918 года? Как её решали большевики?</p><button class="ans"><span class="q">открыть</span><span class="v">Скудные запасы, голод → карточки, хлебная монополия, изъятие излишков, продотряды</span></button></div>
+      <div class="qa in" style="--i:3"><span class="ql">Вопрос 2</span><p class="qq">Сочеталась ли политика к крестьянам с Декретом о земле?</p><button class="ans"><span class="q">открыть</span><span class="v">Нет: землю обещали крестьянам, а хлеб забирали силой → восстания</span></button></div>
+      <div class="qa in" style="--i:4"><span class="ql">Вопрос 3</span><p class="qq">Назови основные положения «военного коммунизма».</p><button class="ans"><span class="q">открыть</span><span class="v">Национализация, продразвёрстка, запрет торговли, паёк, трудовая повинность</span></button></div>
+      <div class="qa in" style="--i:5"><span class="ql">Вопрос 4</span><p class="qq">Для чего проводился «военный коммунизм» и к чему привёл?</p><button class="ans"><span class="q">открыть</span><span class="v">Выиграть войну и прийти к социализму → недовольство и восстания крестьян</span></button></div>
+    </div>
+  </div>
+</section>
+
+<!-- Перед контрольной -->
+<section class="slide" data-era="16">
+  <div class="hdr"><span>История · Контрольная</span><span>Военный коммунизм · 32</span></div>
+  <h2 class="title in">Перед контрольной</h2>
+  <div class="body">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:28px">
+      <div class="card hover-card in" style="--i:1"><span><span class="num">01</span></span><h3>8 терминов</h3><p class="muted" style="font-size:26px">Рассказать каждый одной фразой, без подглядывания</p></div>
+      <div class="card hover-card in" style="--i:2"><span><span class="num">02</span></span><h3>8 дат</h3><p class="muted" style="font-size:26px">Карточки «дата → событие» — два круга с перемешиванием</p></div>
+      <div class="card hover-card in" style="--i:3"><span><span class="num">03</span></span><h3>Национализация</h3><p class="muted" style="font-size:26px">Последовательность: фабрики → банки → транспорт → промышленность → дома</p></div>
+      <div class="card hover-card in" style="--i:4"><span><span class="num">04</span></span><h3>Продразвёрстка</h3><p class="muted" style="font-size:26px">Кто, как и у кого забирал хлеб — рассказать по шагам</p></div>
+    </div>
+  </div>
+</section>
+
+</div>
+</div>
+
+<div class="notes" id="notes" hidden style="display:none"><h4>Заметки для репетитора</h4><div id="notesText"></div></div>
+
+<nav class="bar" aria-label="Навигация по слайдам">
+  <button id="prev" aria-label="Предыдущий слайд">← <span class="label">Назад</span></button>
+  <span class="count" id="count">01 / 32</span>
+  <button id="next" aria-label="Следующий слайд"><span class="label">Вперёд</span> →</button>
+  <span class="spacer"></span>
+  <button id="notesBtn" aria-pressed="false" style="display:none">Заметки</button>
+  <button id="fsBtn">На весь экран</button>
+</nav>
+
+<script>
+/* Общий движок уроков: навигация, масштаб, заметки, лента времени и интерактив.
+   Разметка урока описана в CLAUDE.md. */
+(function(){
+  const isPrint = /[?&]print\b/.test(location.search);
+  if (isPrint) document.documentElement.classList.add('print');
+
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  let cur = 0;
+  window.lessonScale = 1;
+
+  /* ---------- масштаб холста 1920×1080 ---------- */
+  function fit(){
+    if (isPrint) return;
+    const barH = document.querySelector('.bar').getBoundingClientRect().height;
+    const s = Math.min(window.innerWidth / 1920, (window.innerHeight - barH) / 1080);
+    window.lessonScale = s;
+    stage.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  window.addEventListener('resize', fit); fit();
+
+  /* ---------- лента времени: data-era="от-до" по индексам CENTURIES ---------- */
+  const CENTURIES = ['до н. э.', 'I–V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
+  const BLOCK2 = 14, BLOCK3 = 16; /* XVIII и XX — начало 2-го и 3-го блоков ЕГЭ */
+  slides.forEach(sl => {
+    const era = sl.dataset.era;
+    if (!era) return;
+    const [a, b] = era.split('-').map(Number);
+    const to = isNaN(b) ? a : b;
+    const tl = document.createElement('div');
+    tl.className = 'tl';
+    tl.setAttribute('role', 'img');
+    tl.setAttribute('aria-label', `Лента времени: сейчас ${CENTURIES[a]}${to !== a ? '–' + CENTURIES[to] : ''}`);
+    CENTURIES.forEach((c, i) => {
+      const s = document.createElement('span');
+      s.textContent = c;
+      if (i === 0) s.classList.add('wide');
+      if (i === BLOCK2 || i === BLOCK3) s.classList.add('gap');
+      if (i >= BLOCK2) s.classList.add('later');
+      if (i >= a && i <= to) s.classList.add('on');
+      tl.appendChild(s);
+    });
+    sl.appendChild(tl);
+  });
+
+  /* ---------- навигация и заметки ---------- */
+  const notes = document.getElementById('notes'), notesText = document.getElementById('notesText');
+  const key = 'slide:' + document.title;
+  function show(i){
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((s, k) => s.classList.toggle('active', k === cur));
+    document.getElementById('count').textContent = String(cur + 1).padStart(2, '0') + ' / ' + slides.length;
+    const n = slides[cur].querySelector('aside.n');
+    notesText.textContent = n ? n.textContent.trim() : 'Для этого слайда заметок нет.';
+    try { localStorage.setItem(key, cur); } catch(e){}
+    try { history.replaceState(null, '', location.search + '#s' + (cur + 1)); } catch(e){}
+  }
+  document.getElementById('prev').onclick = () => show(cur - 1);
+  document.getElementById('next').onclick = () => show(cur + 1);
+  document.getElementById('notesBtn').onclick = e => { notes.hidden = !notes.hidden; e.currentTarget.setAttribute('aria-pressed', String(!notes.hidden)); };
+  document.getElementById('fsBtn').onclick = () => {
+    try {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else { const p = document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); if (p && p.catch) p.catch(() => {}); }
+    } catch(e){}
+  };
+  document.addEventListener('keydown', e => {
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.classList.contains('srow'))) return;
+    if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); show(cur + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(cur - 1); }
+    if (e.key === 'n' || e.key === 'т') document.getElementById('notesBtn').click();
+  });
+  let start = 0;
+  const m = /#s(\d+)$/.exec(location.hash);
+  if (m) start = +m[1] - 1; else { try { start = +(localStorage.getItem(key) || 0); } catch(e){} }
+  show(start || 0);
+
+  /* ---------- карточки с подсветкой: клик закрепляет ---------- */
+  document.querySelectorAll('.hover-card').forEach(c => {
+    if (!c.hasAttribute('tabindex')) c.tabIndex = 0;
+    const toggle = () => c.classList.toggle('on');
+    c.addEventListener('click', toggle);
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+
+  /* ---------- закрытый ответ: открывается при наведении или нажатии ---------- */
+  document.querySelectorAll('.ans').forEach(b => {
+    const open = () => b.classList.add('open');
+    b.addEventListener('mouseenter', open);
+    b.addEventListener('focus', open);
+    b.addEventListener('click', open);
+  });
+
+  /* ---------- карточки-шторки ----------
+     <div class="flips" style="grid-template-columns:…">
+       <button class="flip">подсказка … <span class="hidebox"><span class="hv">ответ</span></span></button> …
+     </div>
+     <div class="flipbar"></div> — сразу после .flips: движок добавит кнопки и счётчик */
+  document.querySelectorAll('.flips').forEach(box => {
+    const cards = [...box.querySelectorAll('.flip')];
+    const bar = box.nextElementSibling && box.nextElementSibling.classList.contains('flipbar') ? box.nextElementSibling : null;
+    let count = null;
+    if (bar) {
+      bar.innerHTML = '<button class="btn">Открыть все</button><button class="btn">Закрыть все</button><button class="btn">Перемешать</button><span class="count"></span>';
+      const [openAll, closeAll, shuffle] = bar.querySelectorAll('button');
+      count = bar.querySelector('.count');
+      openAll.onclick = () => { cards.forEach(c => set(c, true)); upd(); };
+      closeAll.onclick = () => { cards.forEach(c => set(c, false)); upd(); };
+      shuffle.onclick = () => {
+        const idx = cards.map((_, i) => i);
+        for (let i = idx.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [idx[i], idx[j]] = [idx[j], idx[i]]; }
+        cards.forEach((c, i) => { c.style.order = idx[i]; set(c, false); });
+        upd();
+      };
+    }
+    function set(c, open){ c.classList.toggle('open', open); c.setAttribute('aria-expanded', String(open)); }
+    function upd(){ if (count) count.textContent = `Открыто: ${cards.filter(c => c.classList.contains('open')).length} из ${cards.length}`; }
+    cards.forEach(c => { set(c, false); c.addEventListener('click', () => { set(c, !c.classList.contains('open')); upd(); }); });
+    upd();
+  });
+
+  /* ---------- задание с проверкой ----------
+     <div class="task" data-mode="all|any">
+       <input class="fld" data-answer="1">                 — цифра (одна клетка)
+       <input class="fld txt" data-answer="Царьград|Константинополь"> — слово, варианты через |
+       <button class="opt" data-correct="1">…</button>       — выбор нескольких верных суждений
+       <div class="reveal-on-check">…</div>                  — ответ и пояснение, видны только после проверки
+       <div class="taskbar"></div>                           — сюда движок ставит кнопки и итог
+     </div> */
+  const norm = s => s.toLowerCase().replace(/ё/g, 'е').replace(/[^a-zа-я0-9]/g, '');
+  document.querySelectorAll('.task').forEach(task => {
+    const flds = [...task.querySelectorAll('.fld')];
+    const opts = [...task.querySelectorAll('.opt')];
+    const reveals = [...task.querySelectorAll('.reveal-on-check')];
+    const bar = task.querySelector('.taskbar');
+    bar.innerHTML = '<button class="btn primary">Проверить</button><button class="btn">Сбросить</button><p class="verdict info"></p>';
+    const [checkBtn, resetBtn] = bar.querySelectorAll('button'), out = bar.querySelector('.verdict');
+    flds.forEach((f, i) => {
+      f.autocomplete = 'off';
+      if (!f.classList.contains('txt')) {
+        f.maxLength = 1; f.inputMode = 'numeric';
+        f.addEventListener('input', () => { f.value = f.value.replace(/\D/g, '').slice(-1); if (f.value) { const nx = flds.slice(i + 1).find(x => !x.classList.contains('txt')); if (nx) nx.focus(); } });
+        f.addEventListener('keydown', e => { if (e.key === 'Backspace' && !f.value && i > 0) flds[i - 1].focus(); });
+      }
+      f.addEventListener('input', () => f.classList.remove('ok', 'bad'));
+      f.addEventListener('keydown', e => e.stopPropagation());
+    });
+    opts.forEach(o => {
+      o.setAttribute('aria-pressed', 'false');
+      o.addEventListener('click', () => { o.classList.toggle('sel'); o.setAttribute('aria-pressed', String(o.classList.contains('sel'))); opts.forEach(x => x.classList.remove('ok', 'bad', 'miss')); });
+    });
+    checkBtn.onclick = () => {
+      let total = 0, ok = 0, wrong = 0;
+      flds.forEach(f => {
+        total++;
+        const good = (f.dataset.answer || '').split('|').map(norm).includes(norm(f.value));
+        f.classList.toggle('ok', good); f.classList.toggle('bad', !good); if (good) ok++;
+      });
+      if (opts.length) {
+        const need = opts.filter(o => o.dataset.correct === '1');
+        const picked = opts.filter(o => o.classList.contains('sel'));
+        opts.forEach(o => {
+          const c = o.dataset.correct === '1', s = o.classList.contains('sel');
+          o.classList.toggle('ok', c && s); o.classList.toggle('bad', !c && s); o.classList.toggle('miss', c && !s);
+        });
+        const hit = picked.filter(o => o.dataset.correct === '1').length;
+        wrong = picked.length - hit;
+        total += need.length; ok += hit;
+      }
+      reveals.forEach(r => r.classList.add('show'));
+      if (ok === total && !wrong) verdict(out, 'ok', 'Верно!');
+      else if (ok > 0) verdict(out, 'warn', `Частично верно: ${ok} из ${total}` + (wrong ? `, лишних — ${wrong}.` : '.'));
+      else verdict(out, 'bad', 'Неверно. Разбери ответ.');
+    };
+    resetBtn.onclick = () => {
+      flds.forEach(f => { f.value = ''; f.classList.remove('ok', 'bad'); });
+      opts.forEach(o => { o.classList.remove('sel', 'ok', 'bad', 'miss'); o.setAttribute('aria-pressed', 'false'); });
+      reveals.forEach(r => r.classList.remove('show'));
+      verdict(out, 'info', '');
+    };
+  });
+
+  /* ---------- место для карты или фото ----------
+     <figure class="ph" data-img="z3-karta-pechenegi" data-kind="map|photo"><figcaption>Подпись</figcaption></figure>
+     Движок ищет assets/img/<data-img>.jpg / .jpeg / .png / .webp. Нашёл — показывает картинку (нажатие увеличивает),
+     нет — пунктирную рамку с подписью и именем файла. data-src — готовый адрес (так картинку встраивает однофайловая версия). */
+  const ICONS = {
+    map: '<path d="M8 18 L30 10 L54 18 L76 10 V66 L54 74 L30 66 L8 74 Z M30 10 V66 M54 18 V74" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>',
+    photo: '<rect x="8" y="16" width="68" height="52" rx="8" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="28" cy="34" r="7" fill="none" stroke="currentColor" stroke-width="4"/><path d="M10 62 L34 44 L48 54 L60 44 L74 58" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>'
+  };
+  let zoom = null;
+  function closeZoom(){ if (zoom) { zoom.remove(); zoom = null; } }
+  document.addEventListener('keydown', e => { if (['Escape', 'ArrowLeft', 'ArrowRight', 'PageUp', 'PageDown'].includes(e.key)) closeZoom(); });
+  document.querySelectorAll('.ph').forEach(ph => {
+    const cap = ph.querySelector('figcaption'), label = cap ? cap.textContent.trim() : '';
+    const base = ph.dataset.img || '';
+    const tries = ph.dataset.src ? [ph.dataset.src] : base ? ['jpg', 'jpeg', 'png', 'webp'].map(x => `assets/img/${base}.${x}`) : [];
+    ph.innerHTML = `<svg class="ph-ico" viewBox="0 0 84 84" aria-hidden="true">${ICONS[ph.dataset.kind] || ICONS.photo}</svg>
+      <p class="ph-cap">${label}</p>` + (base ? `<p class="ph-file">Положи файл в папку <b>assets/img</b><br>с именем <b>${base}.jpg</b> (или .png)</p>` : '');
+    if (!tries.length) return;
+    const img = new Image();
+    img.alt = label;
+    let k = 0;
+    img.onerror = () => { if (++k < tries.length) img.src = tries[k]; };
+    img.onload = () => {
+      ph.classList.add('has-img');
+      ph.replaceChildren(img);
+      ph.tabIndex = 0; ph.setAttribute('role', 'button'); ph.setAttribute('aria-label', label + ' — увеличить');
+      const open = () => { closeZoom(); zoom = document.createElement('div'); zoom.className = 'zoom'; zoom.innerHTML = `<img src="${img.src}" alt="${label}">`; zoom.onclick = closeZoom; document.body.appendChild(zoom); };
+      ph.addEventListener('click', open);
+      ph.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    };
+    img.src = tries[0];
+  });
+
+  /* ---------- строки, которые меняются местами при перетаскивании ----------
+     <div class="sortable" data-h="80"> <div class="srow" data-pos="2">…</div> … </div>
+     data-pos — правильное место (с 1); порядок в разметке — стартовый. */
+  function verdict(el, cls, text){ el.className = 'verdict ' + cls; el.textContent = text; }
+  document.querySelectorAll('.sortable').forEach(box => {
+    const rows = [...box.querySelectorAll(':scope > .srow')];
+    const n = rows.length, H = +(box.dataset.h || 80), STEP = H + 14;
+    const start = rows.map((_, i) => i), order = start.slice();
+    rows.forEach((r, k) => {
+      r.style.height = H + 'px';
+      r.tabIndex = 0;
+      const txt = r.innerHTML;
+      r.innerHTML = `<span class="grip" aria-hidden="true"></span><span class="txt">${txt}</span>
+        <button class="mv" data-d="-1" aria-label="Поднять" tabindex="-1">▲</button><button class="mv" data-d="1" aria-label="Опустить" tabindex="-1">▼</button>`;
+      r.setAttribute('aria-label', r.textContent.trim() + '. Стрелки вверх и вниз меняют место.');
+    });
+    const bar = document.createElement('div');
+    bar.className = 'sbar';
+    bar.style.top = (n * STEP + 10) + 'px';
+    bar.innerHTML = '<button class="btn primary">Проверить</button><button class="btn">Сбросить</button><p class="verdict info"></p>';
+    box.appendChild(bar);
+    box.style.height = (n * STEP + 90) + 'px';
+    const [checkBtn, resetBtn] = bar.querySelectorAll('button'), out = bar.querySelector('.verdict');
+
+    function layout(view){ view.forEach((k, row) => { if (!rows[k].classList.contains('dragging')) rows[k].style.top = row * STEP + 'px'; }); }
+    function clear(){ rows.forEach(r => r.classList.remove('ok', 'bad')); verdict(out, 'info', ''); }
+    function swap(a, b){ if (a === b || b < 0 || b >= n) return; [order[a], order[b]] = [order[b], order[a]]; clear(); layout(order); }
+
+    let drag = null;
+    rows.forEach((r, k) => {
+      r.addEventListener('pointerdown', e => {
+        if (e.button !== 0 || e.target.closest('.mv')) return;
+        e.preventDefault(); finish(false);
+        r.focus({preventScroll: true});
+        drag = {r, id: e.pointerId, y0: e.clientY, from: order.indexOf(k), target: order.indexOf(k)};
+        try { r.setPointerCapture(e.pointerId); } catch(err){}
+        r.classList.add('dragging');
+      });
+      r.addEventListener('pointermove', e => {
+        if (!drag || drag.r !== r || e.pointerId !== drag.id) return;
+        const dy = (e.clientY - drag.y0) / window.lessonScale;
+        const top = Math.max(-24, Math.min((n - 1) * STEP + 24, drag.from * STEP + dy));
+        r.style.top = top + 'px';
+        const target = Math.max(0, Math.min(n - 1, Math.round(top / STEP)));
+        if (target !== drag.target) {
+          drag.target = target;
+          const view = order.slice();
+          [view[drag.from], view[target]] = [view[target], view[drag.from]];
+          rows.forEach((x, j) => x.classList.toggle('swap', x !== r && view.indexOf(j) !== order.indexOf(j)));
+          layout(view);
+        }
+      });
+      const end = e => { if (drag && drag.r === r) finish(e.type !== 'pointercancel'); };
+      r.addEventListener('pointerup', end);
+      r.addEventListener('pointercancel', end);
+      r.addEventListener('lostpointercapture', end);
+      r.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+        e.preventDefault(); e.stopPropagation();
+        const row = order.indexOf(k); swap(row, row + (e.key === 'ArrowUp' ? -1 : 1));
+      });
+      r.querySelectorAll('.mv').forEach(b => b.addEventListener('click', e => {
+        e.stopPropagation(); const row = order.indexOf(k); swap(row, row + +b.dataset.d);
+      }));
+    });
+    function finish(commit){
+      if (!drag) return;
+      const d = drag; drag = null;
+      d.r.classList.remove('dragging'); rows.forEach(x => x.classList.remove('swap'));
+      if (commit && d.target !== d.from) swap(d.from, d.target); else layout(order);
+    }
+    window.addEventListener('blur', () => finish(false));
+    checkBtn.onclick = () => {
+      let ok = 0;
+      order.forEach((k, row) => { const r = +rows[k].dataset.pos === row + 1; rows[k].classList.toggle('ok', r); rows[k].classList.toggle('bad', !r); if (r) ok++; });
+      if (ok === n) verdict(out, 'ok', 'Верно!');
+      else if (ok > 0) verdict(out, 'warn', `Частично верно: ${ok} из ${n}.`);
+      else verdict(out, 'bad', 'Неверно. Попробуй ещё раз.');
+    };
+    resetBtn.onclick = () => { finish(false); start.forEach((k, i) => order[i] = k); clear(); layout(order); };
+    layout(order);
+  });
+})();
+
+</script>
